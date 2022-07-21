@@ -45,19 +45,12 @@ void test_TurnOnAndOffManyLeds(void){
 
 //Se pueden prender todos los LEDs de una vez.
 void test_TurnOnAllLeds(void){
-    LedTurnOn(11);
-    LedTurnOn(1);
-    LedTurnOff(3);
     LedTurnOnAll(&ledsVirtuales);
     TEST_ASSERT_EQUAL_HEX16(0xFFFF,ledsVirtuales);
 }
 
 //Se pueden apagar todos los LEDs de una vez.
 void test_TurnOffAllLeds(void){
-    LedTurnOn(11);
-    LedTurnOn(2);
-    LedTurnOff(3);
-    
     LedTurnOffAll(&ledsVirtuales);
     TEST_ASSERT_EQUAL_HEX16(0x0000,ledsVirtuales);
 }
@@ -65,9 +58,6 @@ void test_TurnOffAllLeds(void){
 //Se puede consultar el estado de un LED apagado.
 void test_getStateWhenLedIsOff(void){
     bool ledState = true;
-    LedTurnOn(2);
-    LedTurnOn(3);
-    LedTurnOff(2);
     ledState = LedGetState(2);
     TEST_ASSERT_FALSE(ledState);
 }
@@ -75,9 +65,7 @@ void test_getStateWhenLedIsOff(void){
 //Se puede consultar el estado de un LED prendido.
 void test_getStateWhenLedIsOn(void){
     bool ledState = true;
-    LedTurnOff(2);
     LedTurnOn(2);
-    LedTurnOn(3);
     
     ledState = LedGetState(2);
     TEST_ASSERT_TRUE(ledState);
